@@ -1,0 +1,5 @@
+/.idea/.gitignore
+/.idea/aws.xml
+/.idea/aws-lambda-go-sendContactEmail.iml
+/.idea/modules.xml
+/.idea/vcs.xml
