@@ -13,13 +13,8 @@ func GetAWSSession() *session.Session {
 		return sess
 	}
 
-	var err error
-	sess, err = session.NewSession(&aws.Config{
-		Region: aws.String("eu-west-1")},
-	)
-
-	if err != nil {
-		panic(err)
-	}
+	sess = session.Must(session.NewSession(&aws.Config{
+		Region: aws.String(GetEnv(AWSRegion, "eu-north-1")),
+	}))
 	return sess
 }
