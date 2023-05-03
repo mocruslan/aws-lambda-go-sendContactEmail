@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+const (
+	tagKey = "tag"
+)
+
 func init() {
 	log.SetFormatter(&log.TextFormatter{})
 	log.SetOutput(os.Stdout)
@@ -29,51 +33,101 @@ func envLogLevelToLevel(level string) log.Level {
 }
 
 // Debug is a wrapper around logrus.Debug
-func Debug(args ...interface{}) {
+func Debug(tag string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Debug(args...)
+		return
+	}
+
 	log.Debug(args...)
 }
 
 // Debugf is a wrapper around logrus.Debugf
-func Debugf(format string, args ...interface{}) {
+func Debugf(tag string, format string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Debugf(format, args...)
+		return
+	}
+
 	log.Debugf(format, args...)
 }
 
 // Info is a wrapper around logrus.Info
-func Info(args ...interface{}) {
+func Info(tag string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Info(args...)
+		return
+	}
+
 	log.Info(args...)
 }
 
 // Infof is a wrapper around logrus.Info
-func Infof(format string, args ...interface{}) {
+func Infof(tag string, format string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Infof(format, args...)
+		return
+	}
+
 	log.Infof(format, args...)
 }
 
 // Warn is a wrapper around logrus.Warn
-func Warn(args ...interface{}) {
+func Warn(tag string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Warn(args...)
+		return
+	}
+
 	log.Warn(args...)
 }
 
 // Warnf is a wrapper around logrus.Warnf
-func Warnf(format string, args ...interface{}) {
+func Warnf(tag string, format string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Warnf(format, args...)
+		return
+	}
+
 	log.Warnf(format, args...)
 }
 
 // Error is a wrapper around logrus.Error
-func Error(args ...interface{}) {
+func Error(tag string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Error(args...)
+		return
+	}
+
 	log.Error(args...)
 }
 
 // Errorf is a wrapper around logrus.Errorf
-func Errorf(format string, args ...interface{}) {
+func Errorf(tag string, format string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Errorf(format, args...)
+		return
+	}
+
 	log.Errorf(format, args...)
 }
 
 // Fatal is a wrapper around logrus.Fatal
-func Fatal(args ...interface{}) {
+func Fatal(tag string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Fatal(args...)
+		return
+	}
+
 	log.Fatal(args...)
 }
 
 // Fatalf is a wrapper around logrus.Fatalf
-func Fatalf(format string, args ...interface{}) {
+func Fatalf(tag string, format string, args ...interface{}) {
+	if tag != "" {
+		log.WithField(tagKey, tag).Fatalf(format, args...)
+		return
+	}
+
 	log.Fatalf(format, args...)
 }

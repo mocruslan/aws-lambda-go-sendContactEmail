@@ -9,6 +9,10 @@ import (
 	"lambda/pkg/mailer"
 )
 
+const (
+	tag = "main"
+)
+
 type emailRequest struct {
 	To      string `json:"to"`
 	Subject string `json:"subject"`
@@ -18,7 +22,7 @@ type emailRequest struct {
 func handler(request emailRequest) (events.APIGatewayProxyResponse, error) {
 	fromEmail := env.GetEnv(env.FromEmail, "")
 	if fromEmail == "" {
-		logging.Error("From email was not set")
+		logging.Error(tag, "From email was not set")
 		return events.APIGatewayProxyResponse{}, errors.New("from email not set")
 	}
 

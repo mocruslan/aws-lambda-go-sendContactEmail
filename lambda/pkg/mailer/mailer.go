@@ -7,6 +7,10 @@ import (
 	"lambda/pkg/logging"
 )
 
+const (
+	tag = "mailer"
+)
+
 type Mailer interface {
 	Send(from string, to string, subject string, body string) error
 }
@@ -22,7 +26,7 @@ func NewMailer() Mailer {
 
 // Send sends an email
 func (m *mailer) Send(from string, to string, subject string, body string) error {
-	logging.Debugf("Sending email from [%s] to [%s]", from, to)
+	logging.Debugf(tag, "Sending email from [%s] to [%s]", from, to)
 	sendEmailInput := &sesv2.SendEmailInput{
 		FromEmailAddress: aws.String(from),
 		Destination: &sesv2.Destination{
@@ -48,7 +52,7 @@ func (m *mailer) Send(from string, to string, subject string, body string) error
 		return err
 	}
 
-	logging.Infof("Successfully sent email to [%s]", to)
+	logging.Infof(tag, "Successfully sent email to [%s]", to)
 	return nil
 
 }
@@ -56,11 +60,11 @@ func (m *mailer) Send(from string, to string, subject string, body string) error
 // getClient returns the AWS SES client
 func (m *mailer) getClient() *sesv2.SESV2 {
 	if m.client != nil {
-		logging.Debug("Using cached SESV2 client")
+		logging.Debug(tag, "Using cached SESV2 client")
 		return m.client
 	}
 
-	logging.Debug("Creating new SESV2 client")
+	logging.Debug(tag, "Creating new SESV2 client")
 	m.client = sesv2.New(env.GetAWSSession())
 	return m.client
 }
