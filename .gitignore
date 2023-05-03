@@ -3,3 +3,4 @@
 /.idea/aws-lambda-go-sendContactEmail.iml
 /.idea/modules.xml
 /.idea/vcs.xml
+/.aws-sam/
